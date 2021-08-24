@@ -1,11 +1,30 @@
+<h1>Liste des catégories</h1>
+<button class="btn btn-outline btn-sm" (click)="addCategory()">Ajouter une catégorie</button>
+
 <clr-datagrid>
   <clr-dg-column>ID</clr-dg-column>
   <clr-dg-column>Libellé</clr-dg-column>
 
-  <clr-dg-row *ngFor="let categorie of categories">
+  <clr-dg-row *clrDgItems="let categorie of categories">
+
+    <!-- Actions -->
+    <clr-dg-action-overflow>
+      <button class="action-item" (click)="onEdit(categorie)">Modifier</button>
+      <button class="action-item" (click)="onDelete(categorie)">Supprimer</button>
+    </clr-dg-action-overflow>
+    <!-- End Actions -->
+
     <clr-dg-cell>{{categorie.idCategorie}}</clr-dg-cell>
     <clr-dg-cell>{{categorie.libelle}}</clr-dg-cell>
   </clr-dg-row>
 
-  <clr-dg-footer *ngIf="categories">{{categories.length}} users</clr-dg-footer>
+
+<!-- Inside the full datagrid declaration -->
+<clr-dg-footer>
+  <clr-dg-pagination #pagination [clrDgPageSize]="10">
+    <clr-dg-page-size [clrPageSizeOptions]="[10,20,50,100]">Catégories par page</clr-dg-page-size>
+    {{pagination.firstItem + 1}} - {{pagination.lastItem + 1}} de {{pagination.totalItems}} catégories
+  </clr-dg-pagination>
+</clr-dg-footer>
+
 </clr-datagrid>

@@ -10,6 +10,8 @@ import { HomeComponent } from './components/home/home.component';
 import { DeleteCategoryModalComponent } from './components/delete-category-modal/delete-category-modal.component';
 import { AddOrEditCategoryModalComponent } from './components/add-or-edit-category-modal/add-or-edit-category-modal.component';
 import { ShowCategoryComponent } from './components/show-category/show-category.component';
+import { SideNavComponent } from './components/side-nav/side-nav.component';
+import { HeaderNavComponent } from './components/header-nav/header-nav.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +19,9 @@ import { ShowCategoryComponent } from './components/show-category/show-category.
     HomeComponent,
     DeleteCategoryModalComponent,
     AddOrEditCategoryModalComponent,
-    ShowCategoryComponent
+    ShowCategoryComponent,
+    SideNavComponent,
+    HeaderNavComponent
   ],
   imports: [
     BrowserModule,

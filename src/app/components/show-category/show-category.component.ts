@@ -15,4 +15,16 @@ export class ShowCategoryComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  onEdit(category: Category):void{
+    console.log("modification ", category.idCategorie);
+  }
+
+  onDelete(category: Category):void{
+    console.log("suppression ", category.idCategorie);
+  }
+
+  addCategory(): void {
+
+  }
+
 }
