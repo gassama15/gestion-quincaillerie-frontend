@@ -1,0 +1,11 @@
+<clr-datagrid>
+  <clr-dg-column>ID</clr-dg-column>
+  <clr-dg-column>Libellé</clr-dg-column>
+
+  <clr-dg-row *ngFor="let categorie of categories">
+    <clr-dg-cell>{{categorie.idCategorie}}</clr-dg-cell>
+    <clr-dg-cell>{{categorie.libelle}}</clr-dg-cell>
+  </clr-dg-row>
+
+  <clr-dg-footer *ngIf="categories">{{categories.length}} users</clr-dg-footer>
+</clr-datagrid>

@@ -1,0 +1,32 @@
+<clr-main-container>
+  <clr-header>
+
+    <div class="header-nav" [clr-nav-level]="1">
+      <div class="branding">
+        <span class="title">Admin Baol Quincaillerie</span>
+      </div>
+    </div>
+
+  </clr-header>
+  <div class="content-container">
+    <main class="content-area">
+      <app-show-category [categories]="categories"></app-show-category>
+    </main>
+    <nav class="sidenav" [clr-nav-level]="2">
+      <section class="sidenav-content">
+        <a href="javascript://" class="nav-link active">
+          Catégories
+        </a>
+        <a href="javascript://" class="nav-link">
+          Produits
+        </a>
+        <a href="javascript://" class="nav-link">
+          Clients
+        </a>
+        <a href="javascript://" class="nav-link">
+          Commandes
+        </a>
+      </section>
+    </nav>
+  </div>
+</clr-main-container>
