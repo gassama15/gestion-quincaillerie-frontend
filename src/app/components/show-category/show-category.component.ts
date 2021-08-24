@@ -28,29 +28,56 @@ export class ShowCategoryComponent implements OnInit {
   }
 
   addCategory(): void {
+    this.selectedCategory = undefined;
     this.categoryModalOpen = true;
   }
 
   handleFinish(categorie){
     if (categorie) {
-      console.log(categorie);
+      // console.log(categorie);
       if (this.selectedCategory) {
         // Edit category
+        categorie.idCategorie = this.selectedCategory.idCategorie;
+        this.updateCategoryToServer(categorie);
       }else{
         // Add category
-        this.categoryService.addCategory(categorie).subscribe(
-          (response) => {
-            // console.log(response);
-            categorie.idCategorie = response.idCategorie
-            this.categories.unshift(categorie);
-          },
-          (error) => {
-            console.log(error);
-          }
-        );
+        this.addCategoryToServer(categorie);
       }
     }
     this.categoryModalOpen = false;
+  }
+
+
+
+  addCategoryToServer(categorie){
+    this.categoryService.addCategory(categorie).subscribe(
+      (response) => {
+        // console.log(response);
+        categorie.idCategorie = response.idCategorie
+        this.categories.unshift(categorie);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  }
+
+  updateCategoryToServer(categorie){
+    this.categoryService.updateCategory(categorie).subscribe(
+      (response) => {
+        // console.log(response);
+        // update frontend
+        const index = this.categories.findIndex(c => c.idCategorie === categorie.idCategorie);
+        this.categories = [
+          ...this.categories.slice(0, index),
+          categorie,
+          ...this.categories.slice(index+1)
+        ];
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
   }
 
 }

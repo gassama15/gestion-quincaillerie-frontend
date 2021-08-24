@@ -4,7 +4,7 @@
 <!-- Modal Add or Edit -->
 <app-add-or-edit-category-modal
 *ngIf="categoryModalOpen"
-[categorie]=""
+[categorie]="selectedCategory"
 (finish)="handleFinish($event)"
 >
 </app-add-or-edit-category-modal>
