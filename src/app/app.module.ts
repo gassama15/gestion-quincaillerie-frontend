@@ -12,6 +12,7 @@ import { AddOrEditCategoryModalComponent } from './components/add-or-edit-catego
 import { ShowCategoryComponent } from './components/show-category/show-category.component';
 import { SideNavComponent } from './components/side-nav/side-nav.component';
 import { HeaderNavComponent } from './components/header-nav/header-nav.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { HeaderNavComponent } from './components/header-nav/header-nav.component
     AppRoutingModule,
     ClarityModule,
     BrowserAnimationsModule,
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

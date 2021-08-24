@@ -9,6 +9,8 @@ import { Category } from 'src/app/models/category';
 export class ShowCategoryComponent implements OnInit {
 
   @Input() categories: Category[];
+  categoryModalOpen = false;
+  selectedCategory: Category;
 
   constructor() { }
 
@@ -16,7 +18,8 @@ export class ShowCategoryComponent implements OnInit {
   }
 
   onEdit(category: Category):void{
-    console.log("modification ", category.idCategorie);
+    this.categoryModalOpen = true;
+    this.selectedCategory = category
   }
 
   onDelete(category: Category):void{
@@ -24,7 +27,19 @@ export class ShowCategoryComponent implements OnInit {
   }
 
   addCategory(): void {
+    this.categoryModalOpen = true;
+  }
 
+  handleFinish(categorie){
+    if (categorie) {
+      console.log(categorie);
+      if (this.selectedCategory) {
+        // Edit category
+      }else{
+        // Add category
+      }
+    }
+    this.categoryModalOpen = false;
   }
 
 }

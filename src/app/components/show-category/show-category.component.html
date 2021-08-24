@@ -1,6 +1,15 @@
 <h1>Liste des catégories</h1>
 <button class="btn btn-outline btn-sm" (click)="addCategory()">Ajouter une catégorie</button>
 
+<!-- Modal Add or Edit -->
+<app-add-or-edit-category-modal
+*ngIf="categoryModalOpen"
+[categorie]=""
+(finish)="handleFinish($event)"
+>
+</app-add-or-edit-category-modal>
+<!-- End Modal Add or Edit -->
+
 <clr-datagrid>
   <clr-dg-column>ID</clr-dg-column>
   <clr-dg-column>Libellé</clr-dg-column>

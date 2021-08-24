@@ -1,1 +1,24 @@
-<p>add-or-edit-category-modal works!</p>
+<clr-wizard #wizard [clrWizardOpen]="true" [clrWizardClosable]="false">
+  <clr-wizard-title>{{categorie ? 'Modification catégorie' :  'Ajout catégorie'}}</clr-wizard-title>
+
+  <clr-wizard-button [type]="'cancel'" (click)="handleCancel()">Annuler</clr-wizard-button>
+  <clr-wizard-button [type]="'previous'">Back</clr-wizard-button>
+  <clr-wizard-button [type]="'next'">Next</clr-wizard-button>
+  <clr-wizard-button [type]="'finish'" [clrWizardButtonDisabled]="isFormValid" (click)="handleFinish()">Enregistrer</clr-wizard-button>
+
+<form [formGroup]="categoryForm">
+  <clr-wizard-page #pageOne>
+    <ng-template clrPageTitle>Catégorie</ng-template>
+        <clr-input-container>
+          <label>Libellé catégorie</label>
+          <input clrInput placeholder="Libellé catégorie ..." name="libelle" formControlName="libelle" />
+        </clr-input-container>
+  </clr-wizard-page>
+</form>
+
+
+
+
+
+
+</clr-wizard>
