@@ -13,7 +13,14 @@ export class CategoryService {
 
   constructor(private http: HttpClient) { }
 
-  getCategories(): Observable<Category>{
-    return this.http.get<Category>(this.baseUrl);
+  getCategories(): Observable<Category[]>{
+    return this.http.get<Category[]>(this.baseUrl);
+  }
+
+  addCategory(category: Category):Observable<Category>{
+    // let params = new FormData();
+    // params.append('libelle', category.libelle);
+
+    return this.http.post<Category>(`${this.baseUrl}/new`, category);
   }
 }

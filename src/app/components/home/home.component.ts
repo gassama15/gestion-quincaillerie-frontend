@@ -17,8 +17,9 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.categorySub = this.categoryService.getCategories().subscribe(
-      (response: Category) => {
+      (response: Category[]) => {
         this.categories = response;
+        // console.log(response);
       },
       (error) => {
         console.log(error);

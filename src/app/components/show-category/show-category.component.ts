@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Category } from 'src/app/models/category';
+import { CategoryService } from 'src/app/services/category.service';
 
 @Component({
   selector: 'app-show-category',
@@ -12,7 +13,7 @@ export class ShowCategoryComponent implements OnInit {
   categoryModalOpen = false;
   selectedCategory: Category;
 
-  constructor() { }
+  constructor(private categoryService: CategoryService) { }
 
   ngOnInit(): void {
   }
@@ -37,6 +38,16 @@ export class ShowCategoryComponent implements OnInit {
         // Edit category
       }else{
         // Add category
+        this.categoryService.addCategory(categorie).subscribe(
+          (response) => {
+            // console.log(response);
+            categorie.idCategorie = response.idCategorie
+            this.categories.unshift(categorie);
+          },
+          (error) => {
+            console.log(error);
+          }
+        );
       }
     }
     this.categoryModalOpen = false;
