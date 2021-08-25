@@ -4,5 +4,7 @@ export interface Product {
   description: string,
   photo: string,
   prix: number,
-  qte: number
+  qte: number,
+  categoryId?: number,
+  categoryLibelle?: string
 }

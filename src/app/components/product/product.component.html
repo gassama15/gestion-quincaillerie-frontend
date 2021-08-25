@@ -1,0 +1,11 @@
+<clr-main-container>
+  <app-header-nav></app-header-nav>
+    <div class="content-container">
+      <main class="content-area">
+        <app-show-product [products]="products"></app-show-product>
+      </main>
+      <nav class="sidenav" [clr-nav-level]="2">
+        <app-side-nav></app-side-nav>
+      </nav>
+    </div>
+  </clr-main-container>

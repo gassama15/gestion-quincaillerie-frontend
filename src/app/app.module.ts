@@ -13,6 +13,16 @@ import { ShowCategoryComponent } from './components/show-category/show-category.
 import { SideNavComponent } from './components/side-nav/side-nav.component';
 import { HeaderNavComponent } from './components/header-nav/header-nav.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { RouterModule, Routes } from '@angular/router';
+import { ProductComponent } from './components/product/product.component';
+import { AddOrEditProductModalComponent } from './components/add-or-edit-product-modal/add-or-edit-product-modal.component';
+import { DeleteProductModalComponent } from './components/delete-product-modal/delete-product-modal.component';
+import { ShowProductComponent } from './components/show-product/show-product.component';
+
+const ROUTES: Routes = [
+  {path: '', component: HomeComponent},
+  {path: 'product', component: ProductComponent},
+];
 
 @NgModule({
   declarations: [
@@ -22,7 +32,11 @@ import { ReactiveFormsModule } from '@angular/forms';
     AddOrEditCategoryModalComponent,
     ShowCategoryComponent,
     SideNavComponent,
-    HeaderNavComponent
+    HeaderNavComponent,
+    ProductComponent,
+    AddOrEditProductModalComponent,
+    DeleteProductModalComponent,
+    ShowProductComponent,
   ],
   imports: [
     BrowserModule,
@@ -30,7 +44,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     ClarityModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    RouterModule.forRoot(ROUTES)
   ],
   providers: [],
   bootstrap: [AppComponent]

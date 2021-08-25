@@ -1,0 +1,40 @@
+<h1>Liste des produits</h1>
+<button class="btn btn-outline btn-sm" (click)="addProduct()">Ajouter un produit</button>
+
+
+
+<clr-datagrid>
+  <clr-dg-column>ID</clr-dg-column>
+  <clr-dg-column>Nom Produit</clr-dg-column>
+  <clr-dg-column>description</clr-dg-column>
+  <clr-dg-column>prix</clr-dg-column>
+  <clr-dg-column>Qté en Stock</clr-dg-column>
+  <clr-dg-column>catégorie</clr-dg-column>
+
+  <clr-dg-row *clrDgItems="let product of products">
+
+       <!-- Actions -->
+       <clr-dg-action-overflow>
+        <button class="action-item" (click)="onEdit(product)">Modifier</button>
+        <button class="action-item" (click)="onDelete(product)">Supprimer</button>
+      </clr-dg-action-overflow>
+      <!-- End Actions -->
+
+    <clr-dg-cell>{{product.idProduit}}</clr-dg-cell>
+    <clr-dg-cell>{{product.nomProduit}}</clr-dg-cell>
+    <clr-dg-cell>{{product.description}}</clr-dg-cell>
+    <clr-dg-cell>{{product.prix}} F</clr-dg-cell>
+    <clr-dg-cell>{{product.qte}}</clr-dg-cell>
+    <clr-dg-cell>{{product.categoryLibelle}}</clr-dg-cell>
+  </clr-dg-row>
+
+<!-- Inside the full datagrid declaration -->
+<clr-dg-footer>
+  <clr-dg-pagination #pagination [clrDgPageSize]="10">
+    <clr-dg-page-size [clrPageSizeOptions]="[10,20,50,100]">produits par page</clr-dg-page-size>
+    {{pagination.firstItem + 1}} - {{pagination.lastItem + 1}} de {{pagination.totalItems}} produits
+  </clr-dg-pagination>
+</clr-dg-footer>
+
+</clr-datagrid>
+
