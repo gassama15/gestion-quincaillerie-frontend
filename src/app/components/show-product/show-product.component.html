@@ -1,7 +1,12 @@
 <h1>Liste des produits</h1>
 <button class="btn btn-outline btn-sm" (click)="addProduct()">Ajouter un produit</button>
 
-
+<!-- Modal Add or Edit -->
+<app-add-or-edit-product-modal
+*ngIf="productModalOpen"
+>
+</app-add-or-edit-product-modal>
+<!-- End Modal Add or Edit -->
 
 <clr-datagrid>
   <clr-dg-column>ID</clr-dg-column>

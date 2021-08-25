@@ -9,6 +9,7 @@ import { Product } from 'src/app/models/product';
 export class ShowProductComponent implements OnInit {
 
   @Input() products: Product[];
+  productModalOpen = false;
 
   constructor() { }
 
@@ -16,7 +17,7 @@ export class ShowProductComponent implements OnInit {
   }
 
   onEdit(product: Product): void {
-
+    this.productModalOpen = true;
   }
 
   onDelete(product: Product): void {
@@ -24,7 +25,7 @@ export class ShowProductComponent implements OnInit {
   }
 
   addProduct(): void {
-
+    this.productModalOpen = true;
   }
 
 }
