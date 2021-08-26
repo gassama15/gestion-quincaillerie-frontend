@@ -18,6 +18,7 @@ export class AddOrEditProductModalComponent implements OnInit, OnDestroy {
   categories: Category[];
   categorySub: Subscription;
   scategory;
+  file: File;
 
   constructor(private fb: FormBuilder,
     private categoryService: CategoryService) {
@@ -57,6 +58,9 @@ export class AddOrEditProductModalComponent implements OnInit, OnDestroy {
       ...this.productForm.get('illustration').value,
       category: this.scategory
     };
+    if (this.file) {
+      product.photo = this.file.name;
+    }
     this.finish.emit(product);
     this.close();
   }
@@ -64,6 +68,10 @@ export class AddOrEditProductModalComponent implements OnInit, OnDestroy {
   close(){
     this.productForm.reset();
     this.scategory = this.categories[0];
+  }
+
+  detectFile(event){
+    this.file = event.target.files[0];
   }
 
   ngOnInit(): void {

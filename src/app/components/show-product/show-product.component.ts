@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Product } from 'src/app/models/product';
+import { ProductService } from 'src/app/services/product.service';
 
 @Component({
   selector: 'app-show-product',
@@ -12,7 +13,7 @@ export class ShowProductComponent implements OnInit {
   productModalOpen = false;
   selectedProduct: Product;
 
-  constructor() { }
+  constructor(private productService: ProductService) { }
 
   ngOnInit(): void {
   }
@@ -37,6 +38,12 @@ export class ShowProductComponent implements OnInit {
         // Edit product
       } else {
         // Add product
+        this.productService.addProduct(product).subscribe(
+          (data) => {
+            // console.log(data);
+            this.products.unshift(data);
+          }
+        );
       }
     }
     this.productModalOpen = false;
