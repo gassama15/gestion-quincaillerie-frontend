@@ -61,7 +61,10 @@ export class AddOrEditProductModalComponent implements OnInit, OnDestroy {
     if (this.file) {
       product.photo = this.file.name;
     }
-    this.finish.emit(product);
+    this.finish.emit({
+      product: product,
+      file: this.file ? this.file : null
+    });
     this.close();
   }
 

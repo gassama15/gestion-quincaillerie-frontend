@@ -1,5 +1,7 @@
+import { HttpEvent, HttpEventType } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
 import { Product } from 'src/app/models/product';
+import { FileUploadService } from 'src/app/services/file-upload.service';
 import { ProductService } from 'src/app/services/product.service';
 
 @Component({
@@ -12,8 +14,11 @@ export class ShowProductComponent implements OnInit {
   @Input() products: Product[];
   productModalOpen = false;
   selectedProduct: Product;
+  file: File;
+  progress = 0;
 
-  constructor(private productService: ProductService) { }
+  constructor(private productService: ProductService,
+    private fileService: FileUploadService) { }
 
   ngOnInit(): void {
   }
@@ -31,7 +36,10 @@ export class ShowProductComponent implements OnInit {
     this.productModalOpen = true;
   }
 
-  handleFinish(product){
+  handleFinish(event){
+    let product = event.product ? event.product : null;
+    this.file = event.file ? event.file : null;
+
     if (product) {
       console.log(product);
       if (this.selectedProduct) {
@@ -41,6 +49,27 @@ export class ShowProductComponent implements OnInit {
         this.productService.addProduct(product).subscribe(
           (data) => {
             // console.log(data);
+            if (this.file) {
+              this.fileService.uploadImage(this.file).subscribe(
+                (event: HttpEvent<any>) => {
+                  switch (event.type) {
+                    case HttpEventType.Sent:
+                      console.log("requête envoyée avec succés");
+                      break;
+
+                    case HttpEventType.UploadProgress:
+                      this.progress = Math.round(event.loaded / event.total * 100);
+                      break;
+
+                    case HttpEventType.Response:
+                      console.log(event.body);
+                      setTimeout(() => {
+                        this.progress = 0;
+                      },1500);
+                  }
+                }
+              );
+            }
             this.products.unshift(data);
           }
         );
