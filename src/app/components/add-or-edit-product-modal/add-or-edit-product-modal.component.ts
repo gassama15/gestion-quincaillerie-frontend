@@ -1,4 +1,4 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { Category } from 'src/app/models/category';
@@ -13,6 +13,7 @@ import { CategoryService } from 'src/app/services/category.service';
 export class AddOrEditProductModalComponent implements OnInit, OnDestroy {
 
   @Input() produit: Product;
+  @Output() finish = new EventEmitter();
   productForm: FormGroup;
   categories: Category[];
   categorySub: Subscription;
@@ -35,6 +36,34 @@ export class AddOrEditProductModalComponent implements OnInit, OnDestroy {
 
   selectCategory(category: Category){
     this.scategory = category;
+  }
+
+  get isProductInfosInvalid(): boolean {
+    return this.productForm.get('productInfos').invalid;
+  }
+
+  get isIllustrationInvalid(): boolean {
+    return this.productForm.get('illustration').invalid;
+  }
+
+  handleCancel(){
+    this.finish.emit();
+    this.close();
+  }
+
+  handleFinish(){
+    const product = {
+      ...this.productForm.get('productInfos').value,
+      ...this.productForm.get('illustration').value,
+      category: this.scategory
+    };
+    this.finish.emit(product);
+    this.close();
+  }
+
+  close(){
+    this.productForm.reset();
+    this.scategory = this.categories[0];
   }
 
   ngOnInit(): void {

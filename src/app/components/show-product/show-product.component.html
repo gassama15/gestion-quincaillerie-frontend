@@ -4,6 +4,8 @@
 <!-- Modal Add or Edit -->
 <app-add-or-edit-product-modal
 *ngIf="productModalOpen"
+[produit]="selectedProduct"
+(finish)="handleFinish($event)"
 >
 </app-add-or-edit-product-modal>
 <!-- End Modal Add or Edit -->

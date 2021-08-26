@@ -1,10 +1,10 @@
 <clr-wizard #wizard [clrWizardOpen]="true" [clrWizardClosable]="false">
   <clr-wizard-title>{{produit ? 'Modification produit' :  'Ajout produit'}}</clr-wizard-title>
 
-  <clr-wizard-button [type]="'cancel'">Annuler</clr-wizard-button>
+  <clr-wizard-button [type]="'cancel'" (click)="handleCancel()">Annuler</clr-wizard-button>
   <clr-wizard-button [type]="'previous'">Retour</clr-wizard-button>
   <clr-wizard-button [type]="'next'">Suivant</clr-wizard-button>
-  <clr-wizard-button [type]="'finish'" >Enregistrer</clr-wizard-button>
+  <clr-wizard-button [type]="'finish'" (click)="handleFinish()">Enregistrer</clr-wizard-button>
 
   <clr-wizard-page #pageOne>
     <ng-template clrPageTitle>Sélectionner une catégorie</ng-template>
@@ -52,6 +52,12 @@
       </clr-input-container>
     </div>
 
+    <ng-template clrPageButtons>
+      <clr-wizard-button [type]="'cancel'" (click)="handleCancel()">Annuler</clr-wizard-button>
+      <clr-wizard-button [type]="'previous'">Retour</clr-wizard-button>
+      <clr-wizard-button [type]="'next'" [clrWizardButtonDisabled]="isProductInfosInvalid">Suivant</clr-wizard-button>
+    </ng-template>
+
   </clr-wizard-page>
 
   <clr-wizard-page #pageThree>
@@ -64,6 +70,12 @@
         <input clrInput type="file"  name="photo" formControlName="photo" />
       </clr-input-container>
     </div>
+
+    <ng-template clrPageButtons>
+      <clr-wizard-button [type]="'cancel'" (click)="handleCancel()">Annuler</clr-wizard-button>
+      <clr-wizard-button [type]="'previous'">Retour</clr-wizard-button>
+      <clr-wizard-button [type]="'finish'" (click)="handleFinish()" [clrWizardButtonDisabled]="isIllustrationInvalid">Enregistrer</clr-wizard-button>
+    </ng-template>
 
   </clr-wizard-page>
 
