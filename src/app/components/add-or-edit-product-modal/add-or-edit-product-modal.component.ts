@@ -16,7 +16,7 @@ export class AddOrEditProductModalComponent implements OnInit, OnDestroy {
   productForm: FormGroup;
   categories: Category[];
   categorySub: Subscription;
-  idCategorie = 1;
+  scategory;
 
   constructor(private fb: FormBuilder,
     private categoryService: CategoryService) {
@@ -33,8 +33,8 @@ export class AddOrEditProductModalComponent implements OnInit, OnDestroy {
     })
   }
 
-  selectCategory(idCategorie: number){
-    this.idCategorie = idCategorie;
+  selectCategory(category: Category){
+    this.scategory = category;
   }
 
   ngOnInit(): void {
@@ -42,6 +42,7 @@ export class AddOrEditProductModalComponent implements OnInit, OnDestroy {
     .getCategories().subscribe(
       (response) => {
         this.categories = response;
+        this.scategory = this.categories[0];
         // console.log(this.categories)
       },
       (error) => {
