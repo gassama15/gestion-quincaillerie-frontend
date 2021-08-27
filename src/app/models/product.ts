@@ -9,5 +9,6 @@ export interface Product {
   qte: number,
   category: Category,
   categoryId?: number,
-  categoryLibelle?: string
+  categoryLibelle?: string,
+  oldPhoto?: string;
 }

@@ -24,6 +24,8 @@ export class FileUploadService {
   }
 
   deleteImage(name: string): Observable<any>{
-    return this.http.delete(`${this.baseUrl}/image/delete/${name}`);
+    return this.http.delete(`${this.baseUrl}/image/delete/${name}`, {
+      responseType: 'text'
+    });
   }
 }

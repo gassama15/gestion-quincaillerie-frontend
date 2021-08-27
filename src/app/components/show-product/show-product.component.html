@@ -11,12 +11,13 @@
 <!-- End Modal Add or Edit -->
 
 <clr-datagrid>
-  <clr-dg-column>ID</clr-dg-column>
-  <clr-dg-column>Nom Produit</clr-dg-column>
-  <clr-dg-column>description</clr-dg-column>
+  <clr-dg-column [style.width.px]="50">ID</clr-dg-column>
+  <clr-dg-column [style.width.px]="100">Nom Produit</clr-dg-column>
+  <clr-dg-column [style.width.px]="500">description</clr-dg-column>
   <clr-dg-column>prix</clr-dg-column>
   <clr-dg-column>Qté en Stock</clr-dg-column>
-  <clr-dg-column>catégorie</clr-dg-column>
+  <clr-dg-column [style.width.px]="100">catégorie</clr-dg-column>
+  <clr-dg-column [style.width.px]="50">Image</clr-dg-column>
 
   <clr-dg-row *clrDgItems="let product of products">
 
@@ -33,6 +34,7 @@
     <clr-dg-cell>{{product.prix}} F</clr-dg-cell>
     <clr-dg-cell>{{product.qte}}</clr-dg-cell>
     <clr-dg-cell>{{product.categoryLibelle}}</clr-dg-cell>
+    <clr-dg-cell><img width="50px" [src]="baseUrlImage+product.photo" [alt]="product.nomProduit"></clr-dg-cell>
   </clr-dg-row>
 
 <!-- Inside the full datagrid declaration -->
