@@ -59,8 +59,14 @@ export class AddOrEditProductModalComponent implements OnInit, OnDestroy, OnChan
     const product = {
       ...this.productForm.get('productInfos').value,
       ...this.productForm.get('illustration').value,
-      category: this.scategory
+      category: this.scategory,
+      oldPhoto: null
     };
+
+    if (this.produit) {
+      product.oldPhoto = this.produit.oldPhoto;
+    }
+
     if (this.file) {
       product.photo = this.file.name;
     }else {

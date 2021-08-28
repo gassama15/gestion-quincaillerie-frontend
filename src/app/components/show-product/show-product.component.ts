@@ -58,21 +58,29 @@ export class ShowProductComponent implements OnInit {
 
 
   uploadImage(event){
-    switch (event.type) {
-      case HttpEventType.Sent:
-        console.log("requête envoyée avec succés");
-        break;
+    return new Promise(
+      (resolve, reject) => {
+        switch (event.type) {
+          case HttpEventType.Sent:
+            console.log("requête envoyée avec succés");
+            break;
 
-      case HttpEventType.UploadProgress:
-        this.progress = Math.round(event.loaded / event.total * 100);
-        break;
+          case HttpEventType.UploadProgress:
+            this.progress = Math.round(event.loaded / event.total * 100);
+            // console.log("progess --> ", this.progress);
+            if (this.progress == 100) {
+              resolve(true);
+            }
+            break;
 
-      case HttpEventType.Response:
-        console.log(event.body);
-        setTimeout(() => {
-          this.progress = 0;
-        },1500);
-    }
+          case HttpEventType.Response:
+            console.log(event.body);
+            setTimeout(() => {
+              this.progress = 0;
+            }, 1500);
+        }
+      }
+    )
   }
 
 
@@ -83,11 +91,16 @@ export class ShowProductComponent implements OnInit {
         if (this.file) {
           this.fileService.uploadImage(this.file).subscribe(
             (event: HttpEvent<any>) => {
-              this.uploadImage(event);
+              this.uploadImage(event).then(
+                () => {
+                  setTimeout(() => {
+                    this.products.unshift(data);
+                  }, 3000);
+                }
+              )
             }
           );
         }
-        this.products.unshift(data);
       }
     );
   }
@@ -96,10 +109,19 @@ export class ShowProductComponent implements OnInit {
   editProductToServer(product){
     this.productService.updateProduct(product).subscribe(
       (data: Product) => {
+        product.categoryId = product.category.idCategorie;
+        product.categoryLibelle = product.category.libelle;
         if (this.file) {
           this.fileService.uploadImage(this.file).subscribe(
             (event: HttpEvent<any>) => {
-              this.uploadImage(event);
+              this.uploadImage(event).then(
+                () => {
+                  // update frontend
+                 setTimeout(() => {
+                  this.updateProduct(product);
+                 }, 3000);
+                }
+              )
             }
           );
           this.fileService.deleteImage(product.oldPhoto).subscribe(
@@ -110,20 +132,25 @@ export class ShowProductComponent implements OnInit {
               console.log(error);
             }
           );
+        } else {
+          // update frontend
+          this.updateProduct(product);
         }
-
-        // update frontend
-        const index = this.products.findIndex(p => p.idProduit == product.idProduit);
-        this.products = [
-          ...this.products.slice(0, index),
-          product,
-          ...this.products.slice(index+1)
-        ];
       },
       (error) => {
         console.log(error);
       }
     );
+  }
+
+  updateProduct(product){
+     // update frontend
+     const index = this.products.findIndex(p => p.idProduit == product.idProduit);
+     this.products = [
+       ...this.products.slice(0, index),
+       product,
+       ...this.products.slice(index+1)
+     ];
   }
 
 }
