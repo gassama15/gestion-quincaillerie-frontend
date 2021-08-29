@@ -10,6 +10,16 @@
 </app-add-or-edit-product-modal>
 <!-- End Modal Add or Edit -->
 
+<!-- Modal Delete -->
+<app-delete-product-modal
+*ngIf="delete"
+[product]="productToDelete"
+(cancel)="handleCancelDelete()"
+(confirm)="handleConfirmDelete()"
+>
+</app-delete-product-modal>
+<!-- End Modal Delete -->
+
 <clr-datagrid>
   <clr-dg-column [style.width.px]="50">ID</clr-dg-column>
   <clr-dg-column [style.width.px]="100">Nom Produit</clr-dg-column>

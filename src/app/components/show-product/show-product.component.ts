@@ -15,6 +15,8 @@ export class ShowProductComponent implements OnInit {
   @Input() products: Product[] = [];
   productModalOpen = false;
   selectedProduct: Product;
+  delete = false;
+  productToDelete: Product;
   file: File;
   progress = 0;
   baseUrlImage = `${environment.api_image}`;
@@ -31,12 +33,43 @@ export class ShowProductComponent implements OnInit {
   }
 
   onDelete(product: Product): void {
-
+    this.delete = true;
+    this.productToDelete = product;
   }
 
   addProduct(): void {
     this.selectedProduct = undefined;
     this.productModalOpen = true;
+  }
+
+  handleCancelDelete(){
+    this.delete = false;
+  }
+
+  handleConfirmDelete(){
+    this.productService.deleteProduct(this.productToDelete).subscribe(
+      (data) => {
+        console.log(data);
+        // delete product image
+        this.fileService.deleteImage(this.productToDelete.photo).subscribe(
+          (response) => {
+            console.log(response);
+          },
+          (error) => {
+            console.log(error);
+          }
+        );
+
+        // update frontend
+        const index = this.products.findIndex(p => p.idProduit == this.productToDelete.idProduit);
+        this.products.splice(index, 1);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+
+    this.handleCancelDelete();
   }
 
   handleFinish(event){

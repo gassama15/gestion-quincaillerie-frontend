@@ -10,6 +10,16 @@
 </app-add-or-edit-category-modal>
 <!-- End Modal Add or Edit -->
 
+<!-- Modal Delete -->
+<app-delete-category-modal
+*ngIf="delete"
+[category]="categoryToDelete"
+(cancel)="handleCancelDelete()"
+(confirm)="handleConfirmDelete()"
+>
+</app-delete-category-modal>
+<!-- End Modal Delete -->
+
 <clr-datagrid>
   <clr-dg-column>ID</clr-dg-column>
   <clr-dg-column>Libellé</clr-dg-column>

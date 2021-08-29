@@ -12,6 +12,8 @@ export class ShowCategoryComponent implements OnInit {
   @Input() categories: Category[];
   categoryModalOpen = false;
   selectedCategory: Category;
+  delete = false;
+  categoryToDelete: Category;
 
   constructor(private categoryService: CategoryService) { }
 
@@ -24,12 +26,35 @@ export class ShowCategoryComponent implements OnInit {
   }
 
   onDelete(category: Category):void{
-    console.log("suppression ", category.idCategorie);
+    // console.log("suppression ", category.idCategorie);
+    this.delete = true;
+    this.categoryToDelete = category;
   }
 
   addCategory(): void {
     this.selectedCategory = undefined;
     this.categoryModalOpen = true;
+  }
+
+  handleCancelDelete(){
+    this.delete = false;
+  }
+
+  handleConfirmDelete(){
+    this.categoryService.deleteCategory(this.categoryToDelete).subscribe(
+      (data) => {
+        console.log(data);
+
+        // update frontend
+        const index = this.categories.findIndex(c => c.idCategorie == this.categoryToDelete.idCategorie);
+        this.categories.splice(index, 1);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+
+    this.handleCancelDelete();
   }
 
   handleFinish(categorie){

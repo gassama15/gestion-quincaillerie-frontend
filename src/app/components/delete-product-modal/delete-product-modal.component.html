@@ -1,1 +1,10 @@
-<p>delete-product-modal works!</p>
+<clr-modal [clrModalOpen]="true" [clrModalClosable]="false">
+  <h3 class="modal-title">Suppression produit</h3>
+  <div class="modal-body">
+    <p>Êtes-vous sûr(e) de vouloir supprimer?</p>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-outline" (click)="cancelDelete()">Annuler</button>
+    <button class="btn btn-danger" (click)="confirmDelete()">Confirmer</button>
+  </div>
+</clr-modal>
