@@ -1,9 +1,12 @@
 <section class="sidenav-content">
   <a routerLink="/" class="nav-link" [ngClass]="{'active': hasRoute('/')}">
+    Produits
+  </a>
+  <a routerLink="/category" class="nav-link" [ngClass]="{'active': hasRoute('/category')}">
     Catégories
   </a>
-  <a routerLink="/product" class="nav-link" [ngClass]="{'active': hasRoute('/product')}">
-    Produits
+  <a routerLink="/shop" class="nav-link" [ngClass]="{'active': hasRoute('/shop')}">
+    Boutique
   </a>
   <a href="javascript://" class="nav-link">
     Clients

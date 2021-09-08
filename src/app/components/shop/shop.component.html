@@ -1,0 +1,48 @@
+<clr-main-container>
+  <app-header-nav></app-header-nav>
+    <div class="content-container">
+      <!-- <main class="content-area">
+       <p>Boutique</p>
+       <div class="clr-row">
+        <div *ngFor="let product of products" class="clr-col-lg-4 clr-col-12 clr-align-items-stretch" [ngStyle]="{'display': 'flex'}">
+          <a href="javascript:void(0)" class="card clickable">
+            <div class="card-img">
+              <img [src]="baseUrlImage+product.photo" width="350" height="150" alt="..." />
+            </div>
+            <div class="card-block">
+              <p class="card-text">
+                {{product.nomProduit}}
+              </p>
+            </div>
+            <div [ngStyle]="{'display': 'flex', 'justify-content': 'space-between', 'padding': '10px 30px'}">
+              <button><clr-icon [ngStyle]="{'font-size': '2.5rem'}" shape="shopping-cart"></clr-icon></button>
+              <button><clr-icon [ngStyle]="{'font-size': '2.5rem'}" shape="eye"></clr-icon></button>
+            </div>
+          </a>
+        </div>
+      </div>
+      </main> -->
+      <!-- product tab start -->
+  <div class="container mt-4">
+      <div class="row">
+          <div *ngFor="let product of products" class="col-md-4 mb-30 align-items-stretch d-flex">
+            <div class="card" style="width: 18rem;">
+              <img [src]="baseUrlImage+product.photo" [alt]="product.nomProduit" class="card-img-top" alt="...">
+              <div class="card-body">
+                <h5 class="card-title text-muted text-center">{{product.nomProduit}}</h5>
+                <h5 class="card-title text-muted text-center"><span style="font-weight: bold;">{{product.prix}} F</span></h5>
+                <p class="card-text h3">{{(product.description | slice:0:30)+'...'}}</p>
+                <div class="d-flex justify-content-between">
+                  <a href="#" class="btn btn-primary">Go</a>
+                  <a href="#" class="btn btn-primary">Go</a>
+                </div>
+              </div>
+            </div>
+          </div>
+      </div>
+  </div>
+      <nav class="sidenav" [clr-nav-level]="2">
+        <app-side-nav></app-side-nav>
+      </nav>
+    </div>
+  </clr-main-container>
