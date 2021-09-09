@@ -20,6 +20,8 @@ import { DeleteProductModalComponent } from './components/delete-product-modal/d
 import { ShowProductComponent } from './components/show-product/show-product.component';
 import { ShopComponent } from './components/shop/shop.component';
 
+
+
 const ROUTES: Routes = [
   {path: '', component: ProductComponent},
   {path: 'category', component: HomeComponent},

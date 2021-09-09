@@ -27,6 +27,29 @@ export class ShopComponent implements OnInit, OnDestroy{
     );
   }
 
+  openImageModal(id) {
+    let modal = document.getElementById('myModal-'+id);
+
+    let img = document.getElementById('myImg-'+id) as HTMLImageElement;
+    let modalImg = document.getElementById('img01-'+id) as HTMLImageElement;
+    let captionText = document.getElementById('caption-'+id);
+
+
+      modal.style.display = "block";
+      modalImg.src = img.src;
+      captionText.innerHTML = img.alt;
+
+  }
+
+  closeImageModal(id) {
+    // Get the <span> element that closes the modal
+    let span = document.getElementsByClassName("close")[0] as HTMLElement;
+    let modal = document.getElementById('myModal-'+id);
+
+    // When the user clicks on <span> (x), close the modal
+    modal.style.display = "none";
+  }
+
   ngOnDestroy(): void {
     this.productSub.unsubscribe();
   }

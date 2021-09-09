@@ -27,18 +27,26 @@
       <div class="row">
           <div *ngFor="let product of products" class="col-md-4 mb-30 align-items-stretch d-flex">
             <div class="card" style="width: 18rem;">
-              <img [src]="baseUrlImage+product.photo" [alt]="product.nomProduit" class="card-img-top" alt="...">
+              <a href="javascript://">
+                <img (click)="openImageModal(product.idProduit)" [id]="'myImg-'+product.idProduit" [src]="baseUrlImage+product.photo" [alt]="product.nomProduit" class="card-img-top myImg">
+              </a>
               <div class="card-body">
                 <h5 class="card-title text-muted text-center">{{product.nomProduit}}</h5>
                 <h5 class="card-title text-muted text-center"><span style="font-weight: bold;">{{product.prix}} F</span></h5>
                 <p class="card-text h3">{{(product.description | slice:0:30)+'...'}}</p>
                 <div class="d-flex justify-content-between">
-                  <a href="#" class="btn btn-primary">Go</a>
-                  <a href="#" class="btn btn-primary">Go</a>
+                  <a href="#" class="btn btn-info"><clr-icon size="32" shape="shopping-cart"></clr-icon></a>
+                  <a href="#" class="btn btn-outline-info"><clr-icon size="32" shape="eye"></clr-icon></a>
                 </div>
               </div>
             </div>
           </div>
+      </div>
+      <!-- The Modal -->
+      <div *ngFor="let p of products" [id]="'myModal-'+p.idProduit" class="modal myModal">
+        <span (click)="closeImageModal(p.idProduit)" class="close">&times;</span>
+        <img class="modal-content" [id]="'img01-'+p.idProduit">
+        <div [id]="'caption-'+p.idProduit" class="caption"></div>
       </div>
   </div>
       <nav class="sidenav" [clr-nav-level]="2">
