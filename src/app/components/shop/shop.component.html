@@ -35,7 +35,7 @@
                 <h5 class="card-title text-muted text-center"><span style="font-weight: bold;">{{product.prix}} F</span></h5>
                 <p class="card-text h3">{{(product.description | slice:0:30)+'...'}}</p>
                 <div class="d-flex justify-content-between">
-                  <a href="#" class="btn btn-info"><clr-icon size="32" shape="shopping-cart"></clr-icon></a>
+                  <a href="javascript://" (click)="addToCart(product)" class="btn btn-info"><clr-icon size="32" shape="shopping-cart"></clr-icon></a>
                   <a href="#" class="btn btn-outline-info"><clr-icon size="32" shape="eye"></clr-icon></a>
                 </div>
               </div>

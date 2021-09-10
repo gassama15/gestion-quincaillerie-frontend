@@ -1,4 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Product } from 'src/app/models/product';
+import { CartService } from 'src/app/services/cart.service';
 import { ProductService } from 'src/app/services/product.service';
 import { environment } from 'src/environments/environment';
 
@@ -13,7 +15,7 @@ export class ShopComponent implements OnInit, OnDestroy{
   productSub;
   baseUrlImage = `${environment.api_image}`;
 
-  constructor(private productService: ProductService) { }
+  constructor(private productService: ProductService, private cartService: CartService) { }
 
   ngOnInit(): void {
     this.productSub = this.productService.getProducts().subscribe(
@@ -48,6 +50,14 @@ export class ShopComponent implements OnInit, OnDestroy{
 
     // When the user clicks on <span> (x), close the modal
     modal.style.display = "none";
+  }
+
+  addToCart(p: Product): void {
+    this.cartService.addTocart(p);
+  }
+
+  deleteFromCart(p: Product): void {
+    this.cartService.deleteFromCart(p);
   }
 
   ngOnDestroy(): void {
