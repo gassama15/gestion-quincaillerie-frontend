@@ -7,20 +7,40 @@ import { Product } from '../models/product';
 })
 export class CartService {
 
-  cart: Cart[] = [];
+  cart: Cart[];
   cartData = {len: 0, cost: 0};
 
-  constructor() { }
+  constructor() {
+    this.initCart();
+  }
+
+
+  initCart(): void {
+    if (typeof(localStorage) !== 'undefined') {
+      const cart = JSON.parse(localStorage.getItem('cart'));
+      const cartData = JSON.parse(localStorage.getItem('cartData'));
+      this.cart = cart ? cart : [];
+      this.cartData = cartData ? cartData : {len: 0, cost: 0};
+    } else {
+      this.cart = [];
+      this.cartData = {len: 0, cost: 0};
+    }
+  }
 
   updateCart() {
     let len = 0;
     let cost = 0;
     this.cart.forEach(element => {
       len += element.qty;
-      cost += (element.qty * element.product.prix)
+      cost += (element.qty * element.product.prix);
     });
     this.cartData.len = len;
     this.cartData.cost = cost;
+
+    if (typeof(localStorage) !== 'undefined') {
+      localStorage.setItem("cart", JSON.stringify(this.cart));
+      localStorage.setItem("cartData", JSON.stringify(this.cartData));
+    }
   }
 
   addTocart(p: Product): void {
@@ -45,8 +65,7 @@ export class CartService {
 
   deleteFromCart(p: Product): void {
     const indexProduct = this.cart.findIndex(element => element.product == p);
-    console.log(indexProduct)
-    if (indexProduct) {
+    if (indexProduct != -1) {
       if (this.cart[indexProduct].qty > 1) {
         this.cart[indexProduct].qty--;
       }else {
