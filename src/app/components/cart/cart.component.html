@@ -1,0 +1,56 @@
+<clr-main-container>
+  <app-header-nav></app-header-nav>
+    <div class="content-container">
+      <!-- <main class="content-area">
+      </main> -->
+      <div class="container mt-4" *ngIf="cart.length">
+        <h1>Panier</h1>
+        <div class="row">
+          <div class="col-md-8">
+            <table class="table table-striped table-responsive table-hover">
+              <thead>
+                  <tr>
+                    <th scope="col">Image</th>
+                    <th scope="col">Nom</th>
+                    <th scope="col">Stock Status</th>
+                    <th scope="col">Qté</th>
+                    <th scope="col">Prix</th>
+                    <th scope="col">Action</th>
+                  </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let data of cart">
+                  <td><img style="width: 100px; height: 100px;" [src]="baseUrlImage+data.product.photo" alt=""></td>
+                  <td>{{data.product.nomProduit}}</td>
+                  <td class="text-success">En Stock</td>
+                  <td class="text-center">
+                    <div class="d-flex justify-content-between">
+                      <input [ngStyle]="{'width': '30px', 'text-align': 'center'}" type="text" [value]="data.qty" disabled>
+                      <div class="button-group">
+                          <a (click)="addProduct(data.product)" href="javascript://">
+                            <clr-icon size="24" shape="plus-circle"></clr-icon>
+                          </a>
+
+                          <a (click)="deleteProduct(data.product)" href="javascript://">
+                            <clr-icon size="24" shape="minus-circle"></clr-icon>
+                          </a>
+
+                      </div>
+                    </div>
+                  </td>
+                  <td>{{data.product.prix * data.qty}}F</td>
+                  <td>Supprimer</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="container mt-4" *ngIf="!cart.length">
+        <h3>Votre panier est vide, <a routerLink="/shop">remplissez le</a></h3>
+      </div>
+      <nav class="sidenav" [clr-nav-level]="2">
+        <app-side-nav></app-side-nav>
+      </nav>
+    </div>
+  </clr-main-container>

@@ -19,6 +19,7 @@ import { AddOrEditProductModalComponent } from './components/add-or-edit-product
 import { DeleteProductModalComponent } from './components/delete-product-modal/delete-product-modal.component';
 import { ShowProductComponent } from './components/show-product/show-product.component';
 import { ShopComponent } from './components/shop/shop.component';
+import { CartComponent } from './components/cart/cart.component';
 
 
 
@@ -26,6 +27,7 @@ const ROUTES: Routes = [
   {path: '', component: ProductComponent},
   {path: 'category', component: HomeComponent},
   {path: 'shop', component: ShopComponent},
+  {path: 'cart', component: CartComponent},
 ];
 
 @NgModule({
@@ -42,6 +44,7 @@ const ROUTES: Routes = [
     DeleteProductModalComponent,
     ShowProductComponent,
     ShopComponent,
+    CartComponent,
   ],
   imports: [
     BrowserModule,

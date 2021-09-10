@@ -45,7 +45,7 @@ export class CartService {
 
   deleteFromCart(p: Product): void {
     const indexProduct = this.cart.findIndex(element => element.product == p);
-
+    console.log(indexProduct)
     if (indexProduct) {
       if (this.cart[indexProduct].qty > 1) {
         this.cart[indexProduct].qty--;
