@@ -44,7 +44,7 @@ export class CartService {
   }
 
   addTocart(p: Product): void {
-    const existedProduct = this.cart.find(element => element.product == p);
+    const existedProduct = this.cart.find(element => element.product.idProduit == p.idProduit);
 
     if (existedProduct) {
       existedProduct.qty++;
@@ -75,5 +75,14 @@ export class CartService {
 
     this.updateCart();
 
+  }
+
+  moveToTrash(p: Product): void {
+    const indexProduct = this.cart.findIndex(element => element.product == p);
+    if (indexProduct != -1) {
+        this.cart.splice(indexProduct, 1);
+    }
+
+    this.updateCart();
   }
 }

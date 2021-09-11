@@ -28,4 +28,9 @@ export class CartComponent implements OnInit {
     this.cartService.deleteFromCart(p);
   }
 
+  moveToTrash(p: Product): void {
+    if (window.confirm("Êtes-vous sûr(e) de vouloir supprimer?")) {
+      this.cartService.moveToTrash(p);
+    }
+  }
 }

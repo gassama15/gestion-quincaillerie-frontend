@@ -1,0 +1,50 @@
+<clr-main-container>
+  <app-header-nav></app-header-nav>
+  <div class="content-container">
+    <!-- <main class="content-area">
+      </main> -->
+
+    <div class="container mt-4">
+      <a routerLink="/shop" class="btn btn-info m-4">Retour</a>
+      <div class="row">
+        <div class="col-md-6 mx-auto">
+          <div class="row">
+            <div class="col-md-10">
+              <div *ngIf="product" class="card" style="width: 18rem">
+                <img
+                  class="card-img-top img-fluid"
+                  [src]="baseUrlImage + product.photo"
+                  alt="Card image cap"
+                />
+                <div class="card-body">
+                  <h5 class="card-title">libellé: {{ product.nomProduit }}</h5>
+                  <p class="card-text">description: {{ product.description }}</p>
+                </div>
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item">
+                    PRIX: <span class="text-muted">{{ product.prix }}F</span>
+                  </li>
+                  <li class="list-group-item">
+                    catégorie: {{ product.categoryLibelle }}
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="col-md-2 col-sm-12 my-auto">
+              <a
+                (click)="addToCart(product)"
+                href="javascript://"
+                class="btn btn-block btn-info"
+              >
+                <clr-icon size="24" shape="shopping-cart"></clr-icon>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <nav class="sidenav" [clr-nav-level]="2">
+      <app-side-nav></app-side-nav>
+    </nav>
+  </div>
+</clr-main-container>

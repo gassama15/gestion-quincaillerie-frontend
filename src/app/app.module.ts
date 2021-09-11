@@ -20,6 +20,7 @@ import { DeleteProductModalComponent } from './components/delete-product-modal/d
 import { ShowProductComponent } from './components/show-product/show-product.component';
 import { ShopComponent } from './components/shop/shop.component';
 import { CartComponent } from './components/cart/cart.component';
+import { ProductDetailsComponent } from './components/product-details/product-details.component';
 
 
 
@@ -28,6 +29,7 @@ const ROUTES: Routes = [
   {path: 'category', component: HomeComponent},
   {path: 'shop', component: ShopComponent},
   {path: 'cart', component: CartComponent},
+  {path: 'product-details/:id', component: ProductDetailsComponent},
 ];
 
 @NgModule({
@@ -45,6 +47,7 @@ const ROUTES: Routes = [
     ShowProductComponent,
     ShopComponent,
     CartComponent,
+    ProductDetailsComponent,
   ],
   imports: [
     BrowserModule,
