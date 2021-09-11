@@ -16,7 +16,8 @@ export class ShopComponent implements OnInit, OnDestroy{
   productSub: Subscription;
   baseUrlImage = `${environment.api_image}`;
   currentPage = 0;
-  pages = [0,1];
+  pages = [];
+  totalPages:number
 
   constructor(private productService: ProductService, private cartService: CartService) { }
 
@@ -34,6 +35,16 @@ export class ShopComponent implements OnInit, OnDestroy{
     */
    this.productSub = this.productService.productSub.subscribe(
      (data) => {
+      if (data.length) {
+        // console.log(data.length/6)
+        const totalPages = data.length/6;
+        this.totalPages = totalPages
+        let newPages = [];
+        for (let index = 0; index < totalPages; index++) {
+          newPages[index] = index;
+        }
+        this.pages = newPages;
+      }
        this.products = this.productService.getProductsByPage(this.currentPage);
      }
    );
