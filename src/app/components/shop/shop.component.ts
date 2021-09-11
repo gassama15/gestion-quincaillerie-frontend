@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { Product } from 'src/app/models/product';
 import { CartService } from 'src/app/services/cart.service';
 import { ProductService } from 'src/app/services/product.service';
@@ -11,13 +12,16 @@ import { environment } from 'src/environments/environment';
 })
 export class ShopComponent implements OnInit, OnDestroy{
 
-  products;
-  productSub;
+  products: Product[] = [];
+  productSub: Subscription;
   baseUrlImage = `${environment.api_image}`;
+  currentPage = 0;
+  pages = [0,1];
 
   constructor(private productService: ProductService, private cartService: CartService) { }
 
   ngOnInit(): void {
+    /* before pagination feature
     this.productSub = this.productService.getProducts().subscribe(
       (response) => {
         console.log(response);
@@ -27,6 +31,13 @@ export class ShopComponent implements OnInit, OnDestroy{
         console.log(error);
       }
     );
+    */
+   this.productSub = this.productService.productSub.subscribe(
+     (data) => {
+       this.products = this.productService.getProductsByPage(this.currentPage);
+     }
+   );
+   this.productService.emitProducts();
   }
 
   openImageModal(id) {
@@ -58,6 +69,32 @@ export class ShopComponent implements OnInit, OnDestroy{
 
   deleteFromCart(p: Product): void {
     this.cartService.deleteFromCart(p);
+  }
+
+  changePage(numPage: number): void {
+    const products = this.productService.getProductsByPage(numPage);
+    if (products) {
+      this.products = products;
+      this.currentPage = numPage;
+    }
+  }
+
+  nextPage(): void {
+    const newCurrentPage = this.currentPage+1;
+    const products = this.productService.getProductsByPage(newCurrentPage);
+    if (products) {
+      this.products = products;
+      this.currentPage = newCurrentPage;
+    }
+  }
+
+  prevPage(): void {
+    const newCurrentPage = this.currentPage-1;
+    const products = this.productService.getProductsByPage(newCurrentPage);
+    if (products) {
+      this.products = products;
+      this.currentPage = newCurrentPage;
+    }
   }
 
   ngOnDestroy(): void {
