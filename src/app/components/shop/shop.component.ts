@@ -37,7 +37,7 @@ export class ShopComponent implements OnInit, OnDestroy{
      (data) => {
       if (data.length) {
         // console.log(data.length/6)
-        const totalPages = data.length/6;
+        const totalPages = Math.ceil(data.length/6);
         this.totalPages = totalPages
         let newPages = [];
         for (let index = 0; index < totalPages; index++) {
